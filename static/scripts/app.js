@@ -2,9 +2,9 @@
 // when more browsers support MediaRecorder
 
 navigator.getUserMedia = ( navigator.getUserMedia ||
-                       navigator.webkitGetUserMedia ||
-                       navigator.mozGetUserMedia ||
-                       navigator.msGetUserMedia);
+                           navigator.webkitGetUserMedia ||
+                           navigator.mozGetUserMedia ||
+                           navigator.msGetUserMedia);
 
 // set up basic variables for app
 
@@ -52,9 +52,9 @@ if (navigator.getUserMedia) {
 	      setTimeout(function() {
 		  progress.innerText = "";
 		  startRecording();
-	      }, 1000);
-	  }, 1000);
-      }, 1000);
+	      }, 1500);
+	  }, 1500);
+      }, 1500);
       stop.disabled = false;
       record.disabled = true;
     }
@@ -143,27 +143,18 @@ function visualize(stream) {
   draw()
 
   function draw() {
-
     requestAnimationFrame(draw);
-
     analyser.getByteTimeDomainData(dataArray);
-
     canvasCtx.fillStyle = 'rgb(200, 200, 200)';
     canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-
     canvasCtx.lineWidth = 2;
     canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
-
     canvasCtx.beginPath();
-
     var sliceWidth = WIDTH * 1.0 / bufferLength;
     var x = 0;
-
     for(var i = 0; i < bufferLength; i++) {
- 
       var v = dataArray[i] / 128.0;
       var y = v * HEIGHT/2;
-
       if(i === 0) {
         canvasCtx.moveTo(x, y);
       } else {
@@ -178,18 +169,9 @@ function visualize(stream) {
   }
 }
 
-var wantedWords = [
-  'Zero',
-  'One',
-  'Two',
-  'Three'
-];
+var wantedWords = ['Zero','One','Two','Three'];
 
-var fillerWords = [
-  'Dog',
-  'Cat',
-  'Bird'
-];
+var fillerWords = ['Dog','Cat','Bird'];
 
 function getRecordedWords() {
   var wordElements = document.querySelectorAll('.clip-label');
@@ -207,7 +189,7 @@ function getRecordedWords() {
 function getAllWantedWords() {
   var wordCounts = {};
   wantedWords.forEach(function(word) {
-    wordCounts[word] = 2;
+    wordCounts[word] = 1;
   });
   fillerWords.forEach(function(word) {
     wordCounts[word] = 1;
@@ -304,7 +286,7 @@ function endRecording() {
   console.log("recorder stopped");
   record.style.background = "";
   record.style.color = "";
-  setTimeout(startRecording, 1000);
+  setTimeout(startRecording, 2000);
 }
 
 function promptToSave() {
